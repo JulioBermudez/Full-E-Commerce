@@ -1,7 +1,12 @@
+import Banner from "../../components/Header/Banner"
+import HomeCategory from "../../components/HomeCategory/HomeCategory"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+    <Banner/>
+    <HomeCategory/>
+    </>
   )
 }
 
