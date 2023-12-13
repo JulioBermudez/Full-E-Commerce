@@ -1,6 +1,7 @@
 import CategoryShowcase from "../../components/CategoryShowcase/CategoryShowcase"
 import Banner from "../../components/Header/Banner"
 import HomeCategory from "../../components/HomeCategory/HomeCategory"
+import Register from "../../components/Register/Register"
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
     <Banner/>
     <HomeCategory/>
     <CategoryShowcase/>
+    <Register/>
     </>
   )
 }
