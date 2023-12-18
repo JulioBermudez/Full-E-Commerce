@@ -7,14 +7,14 @@ import Data from "../../products.json";
 import ProductCards from "../../components/ProductCards/ProductCards";
 import Paginations from "../../components/Pagination/Paginations";
 import Search from "../../components/Search/Search";
+import ShopCategories from "../../components/ShopCategories/ShopCategories";
 
 const title = "Our Shop Page";
-const currentPage = "Shop";
+// const currentPage = "Shop";
 
 const showResults = "Showing 01 - 12 of 139 Results";
 
 const Shop = () => {
-    
   const [gridList, setGridList] = useState(true);
   const [products, setProducts] = useState(Data);
 
@@ -22,14 +22,30 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
-  const indexOfLastProduct = currentPage * productsPerPage
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   //FUNCTION TO CHANGE CURRENT PAGE
-const paginate = (pageNumber) =>{
-    setCurrentPage(pageNumber)
-}
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  //FILTER PRODUCT BASE ON CATEGORY
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const menuItems = [...new Set(Data.map((val) => val.category))];
+
+  const filterItem = (currentCategory) => {
+    const newItems = Data.filter((newVal) => {
+      return newVal.category === currentCategory;
+    });
+
+    setSelectedCategory(currentCategory);
+    setProducts(newItems);
+  };
 
   return (
     <>
@@ -57,20 +73,30 @@ const paginate = (pageNumber) =>{
                 </div>
                 {/*PRODUCT CARDS*/}
                 <div>
-                  <ProductCards gridList={gridList} products={currentProducts} />
+                  <ProductCards
+                    gridList={gridList}
+                    products={currentProducts}
+                  />
                 </div>
-                <Paginations 
-                productsPerPage={productsPerPage}
-                totalProducts={products.length}
-                paginate = {paginate}
-                activePage = {currentPage}
+                <Paginations
+                  productsPerPage={productsPerPage}
+                  totalProducts={products.length}
+                  paginate={paginate}
+                  activePage={currentPage}
                 />
               </article>
             </div>
             <div className="col-lg-4 col-12">
-                <aside>
-                    <Search products={products} gridList={gridList}/>
-                </aside>
+              <aside>
+                <Search products={products} gridList={gridList} />
+                <ShopCategories
+                  filterItem={filterItem}
+                  setItem={setProducts}
+                  menuItems={menuItems}
+                  setProducts={setProducts}
+                  selectedCategory={selectedCategory}
+                />
+              </aside>
             </div>
           </div>
         </div>

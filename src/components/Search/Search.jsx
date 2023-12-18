@@ -38,6 +38,12 @@ const Search = ({ products, gridList }) => {
                     className={`flex-{grow|shrink}-0`}
                   />
                 </div>
+                <div className="product-content">
+                    <p>
+                      <Link to={`/shop/${product.id}`}>{product.name}</Link>
+                    </p>
+                    <h6>${product.price}</h6>
+                </div>
               </div>
             </div>
           </Link>
