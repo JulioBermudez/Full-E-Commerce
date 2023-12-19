@@ -8,6 +8,8 @@ import ProductCards from "../../components/ProductCards/ProductCards";
 import Paginations from "../../components/Pagination/Paginations";
 import Search from "../../components/Search/Search";
 import ShopCategories from "../../components/ShopCategories/ShopCategories";
+import PopularPost from "../../components/PopularPost/PopularPost";
+import Tags from "../../components/Tags/Tags";
 
 const title = "Our Shop Page";
 // const currentPage = "Shop";
@@ -96,6 +98,8 @@ const Shop = () => {
                   setProducts={setProducts}
                   selectedCategory={selectedCategory}
                 />
+                <PopularPost/>
+                <Tags/>
               </aside>
             </div>
           </div>
