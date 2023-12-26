@@ -111,8 +111,8 @@ const ProductDisplay = ({ item }) => {
             </i>
           </div>
           {/*CART PLUS MINUS */}
-          <div className="cart-plus-minus" onClick={handleDecrease}>
-            <div className="dec qtybutton">-</div>
+          <div className="cart-plus-minus">
+            <div className="dec qtybutton"  onClick={handleDecrease}>-</div>
             <input
               className="cart-plus-minus-box "
               type="text"
