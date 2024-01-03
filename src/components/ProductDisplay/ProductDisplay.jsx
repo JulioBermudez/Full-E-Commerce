@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Ratting from "../Ratting/Ratting";
 import { FaChevronDown } from "react-icons/fa";
