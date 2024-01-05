@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import "./modal.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
   const [show, setShow] = useState(false);
@@ -12,6 +14,17 @@ const CheckoutPage = () => {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+
+  //direct to home page
+  const location = useLocation();
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || "/"
+
+  const handleOrderConfirm = () => {
+    alert("Your Order is placed successfully");
+    localStorage.removeItem("cart");
+    navigate(from,{replace: true})
+  };
 
   return (
     <div className="modalCard">
@@ -74,9 +87,153 @@ const CheckoutPage = () => {
                     </a>
                   </li>
                 </ul>
-                
-                {/*Contents */}
 
+                {/*Contents */}
+                <div className="tab-content" id="myTabContent">
+                  {/*Visa Content */}
+                  <div
+                    className={`tab-pane fade ${
+                      activeTab === "visa" ? "show active" : ""
+                    }`}
+                    id="visa"
+                    role="tabpanel"
+                    aria-labelledby="visa-tab"
+                  >
+                    {/*visa tab content */}
+
+                    <div className="mt-4 mx-4">
+                      <div className="text-center">
+                        <h5>Credit card</h5>
+                      </div>
+                      <div className="form mt-3">
+                        <div className="inputbox">
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            className="form-control"
+                            required
+                          />
+                          <span>Cardholder name</span>
+                        </div>
+                        <div className="inputbox">
+                          <input
+                            type="text"
+                            name="number"
+                            id="number"
+                            className="form-control"
+                            min="1"
+                            max="999"
+                            required
+                          />
+                          <span>Card Number</span>
+                        </div>
+                        <div className="d-flex flex-row">
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="name"
+                              id="name"
+                              className="form-control"
+                              required
+                            />
+                            <span>Expiration Date</span>
+                          </div>
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="number"
+                              id="number"
+                              className="form-control"
+                              min="1"
+                              max="999"
+                              required
+                            />
+                            <span>CVV</span>
+                          </div>
+                        </div>
+                        <div className="px-5 pay">
+                          <button
+                            className="btn btn-success btn-block"
+                            onClick={handleOrderConfirm}
+                          >
+                            Order Now
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/*Paypal Content */}
+
+                  <div
+                    className={`tab-pane fade ${
+                      activeTab === "paypal" ? "show active" : ""
+                    }`}
+                    id="paypal"
+                    role="tabpanel"
+                    aria-labelledby="paypal-tab"
+                  >
+                    <div className="mt-4 mx-4">
+                      <div className="text-center">
+                        <h5>Paypal Acount Info</h5>
+                      </div>
+                      <div className="form mt-3">
+                        <div className="inputbox">
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            className="form-control"
+                            required
+                          />
+                          <span>Enter Your Email</span>
+                        </div>
+                        <div className="inputbox">
+                          <input
+                            type="text"
+                            name="number"
+                            id="number"
+                            className="form-control"
+                            min="1"
+                            max="999"
+                            required
+                          />
+                          <span>Your Name</span>
+                        </div>
+                        <div className="d-flex flex-row">
+                          <div className="inputbox">
+                            <input
+                              type="text"
+                              name="number"
+                              id="number"
+                              className="form-control"
+                              min="1"
+                              max="999"
+                              size="50"
+                              required
+                            />
+                            <span>Exta Info</span>
+                          </div>
+                        </div>
+                        <div className="px-5 pay">
+                          <button
+                            className="btn btn-primary btn-block"
+                            onClick={handleOrderConfirm}
+                          >
+                            Add Paypal
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/*payment desclaimer */}
+                <p className="mt-3 px-4 p-Disclaimer">
+                  <em>Payment Disclaimer: </em>In no event shall payment or
+                  partial payment by Owner for any material or service{" "}
+                </p>
               </div>
             </div>
           </div>
